@@ -11,7 +11,8 @@ const api = axios.create({
 function isNetworkError(error) {
   return error.code === 'ERR_NETWORK'
     || error.code === 'ECONNABORTED'
-    || !error.response;
+    || !error.response
+    || [404, 502, 503, 504].includes(error.response.status);
 }
 
 function readLocalAccounts() {
