@@ -2,6 +2,7 @@
   "name": "shoes-website-frontend",
   "version": "1.0.0",
   "description": "Frontend for shoes website",
+  "homepage": ".",
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
