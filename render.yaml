@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: mela-marketplace-api
+    runtime: node
+    plan: free
+    buildCommand: cd backend && npm ci
+    startCommand: cd backend && npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        value: https://alfezpathan695-code.github.io

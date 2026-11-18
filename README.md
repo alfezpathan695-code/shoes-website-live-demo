@@ -46,6 +46,22 @@ The Express API is organized into `models`, `controllers`, `routes`, and `middle
 
 Run backend tests with `npm test`. Set `REACT_APP_API_URL` in the frontend environment to override the default API URL (`http://localhost:5000/api`).
 
+## Public deployment
+
+The React site can run on GitHub Pages, but authentication and orders require a publicly reachable Express/MongoDB backend.
+
+1. Create a MongoDB Atlas database and copy its connection string.
+2. In Render, create a Blueprint from this repository and select `render.yaml`.
+3. Enter the Atlas `MONGODB_URI` value when Render requests it.
+4. After Render starts the API, seed it once from the local project:
+   ```powershell
+   cd backend
+   npm run seed
+   ```
+   Set `MONGODB_URI` in `backend/.env` to the Atlas connection string before seeding.
+5. In GitHub repository settings, add a `REACT_APP_API_URL` Actions secret containing `https://YOUR-RENDER-SERVICE.onrender.com/api`.
+6. Re-run the GitHub Pages deployment workflow.
+
 ## Tech Stack
 - **Frontend**: React
 - **Backend**: Node.js / Express / MongoDB

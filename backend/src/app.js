@@ -7,9 +7,17 @@ const productRoutes = require('./routes/productRoutes');
 const { errorHandler, notFound } = require('./middleware/errorMiddleware');
 
 const app = express();
-const allowedOrigin = process.env.CLIENT_URL || 'http://localhost:3000';
+const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:3000')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 
-app.use(cors({ origin: allowedOrigin }));
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(null, false);
+  },
+}));
 app.use(express.json({ limit: '1mb' }));
 
 app.get('/', (req, res) => {
