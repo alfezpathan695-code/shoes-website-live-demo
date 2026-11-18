@@ -205,6 +205,7 @@ function HomePage() {
         productId: item.id,
         variant: item.variant || 'Standard',
         quantity: item.quantity,
+        unitPrice: item.price,
       })),
       shippingAddress,
     }, auth.token);

@@ -39,7 +39,7 @@ function CheckoutModal({ cartTotal, onClose, onPlaceOrder }) {
     try {
       await onPlaceOrder(address);
     } catch (requestError) {
-      const message = requestError.response?.data?.message;
+      const message = requestError.response?.data?.message || requestError.message;
       setError(message || 'Could not place your order. Please try again.');
     } finally {
       setSubmitting(false);

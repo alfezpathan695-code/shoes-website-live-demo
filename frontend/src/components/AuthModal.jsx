@@ -33,7 +33,7 @@ function AuthModal({ user, onClose, onAuthenticated, onSignOut }) {
         : await createAccount({ name, email, password });
       onAuthenticated(session);
     } catch (requestError) {
-      const message = requestError.response?.data?.message;
+      const message = requestError.response?.data?.message || requestError.message;
       setError(message || 'Could not connect to the account service. Please try again.');
     } finally {
       setSubmitting(false);
