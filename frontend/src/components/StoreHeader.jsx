@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from './Icon';
+import MelaLogo from './MelaLogo';
 
 function StoreHeader({ query, wishlistCount, cartCount, onSearch, onAccount, onWishlist, onBag }) {
   return (
@@ -10,7 +11,7 @@ function StoreHeader({ query, wishlistCount, cartCount, onSearch, onAccount, onW
       </div>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Mela home">
-          <span className="brand-mark">m</span><span>mela<span className="brand-period">.</span></span>
+          <MelaLogo />
         </a>
         <div className="search-wrap">
           <Icon name="search" size={19} />

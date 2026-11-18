@@ -1,4 +1,5 @@
 import React from 'react';
+import MelaLogo from './MelaLogo';
 
 const shopLinks = ['Women', 'Men', 'Girls', 'Boys', 'Kids', 'Home', 'Beauty', 'Accessories', 'Electronics', 'Kitchen', 'Shoes'];
 
@@ -8,7 +9,7 @@ function SiteFooter({ onSelectCategory }) {
       <div className="footer-main">
         <div className="footer-about">
           <a className="brand footer-brand" href="#top">
-            <span className="brand-mark">m</span><span>mela<span className="brand-period">.</span></span>
+            <MelaLogo />
           </a>
           <p>Everyday finds, little prices, and a lot more reasons to smile. Discover something lovely for everyone at home.</p>
           <span className="footer-made">Made with <span>♡</span> in India</span>

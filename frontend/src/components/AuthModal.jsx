@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Icon from './Icon';
+import MelaLogo from './MelaLogo';
 import { createAccount, signIn } from '../api/storeApi';
 
 function AuthModal({ user, onClose, onAuthenticated, onSignOut }) {
@@ -46,7 +47,7 @@ function AuthModal({ user, onClose, onAuthenticated, onSignOut }) {
         <button className="detail-close" onClick={onClose} aria-label="Close account dialog"><Icon name="close" /></button>
         {user ? (
           <div className="account-session">
-            <span className="account-icon">m</span>
+            <span className="account-icon"><MelaLogo compact /></span>
             <span className="eyebrow">YOUR MELA ACCOUNT</span>
             <h2 id="account-title">Hi, {user.name}</h2>
             <p>{user.email}</p>
