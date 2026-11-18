@@ -1,30 +1,35 @@
-const express = require('express');
-const cors = require('cors');
 require('dotenv').config();
+const mongoose = require('mongoose');
+const app = require('./app');
+const connectDB = require('./config/db');
 
-const app = express();
+async function startServer() {
+  const { JWT_SECRET, PORT = 5000 } = process.env;
+  if (!JWT_SECRET || JWT_SECRET.length < 32) {
+    throw new Error('Set JWT_SECRET to a private value with at least 32 characters in backend/.env.');
+  }
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+  await connectDB();
+  const server = app.listen(PORT, () => {
+    console.log(`Mela API listening on port ${PORT}`);
+  });
 
-// Basic route
-app.get('/', (req, res) => {
-  res.json({ message: '👟 Shoes Website API - Server is Running!' });
-});
+  function shutdown() {
+    server.close(async () => {
+      await mongoose.disconnect();
+      process.exit(0);
+    });
+  }
 
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date() });
-});
+  process.once('SIGINT', shutdown);
+  process.once('SIGTERM', shutdown);
+}
 
-// Error handling
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Something went wrong!' });
-});
+if (require.main === module) {
+  startServer().catch((error) => {
+    console.error('Unable to start the API:', error.message);
+    process.exitCode = 1;
+  });
+}
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+module.exports = { startServer };
